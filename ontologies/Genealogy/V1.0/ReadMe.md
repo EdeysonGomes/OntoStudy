@@ -114,6 +114,9 @@ Therefore, R1 leverages the existing sibling and mother-child relationships to d
 
 ## Inferring Fatherhood via Rule R3
 
+![hasFather](hasFatherDL.jpg)
+
+
 Rule R3, represented as `hasBrother(?x, ?y) ^ hasFather(?y, ?f) -> hasFather(?x, ?f)`, focuses on inferring the father of an individual based on their sibling relationship and the father of their sibling. Here's a detailed explanation of how R3 works:
 
 *   **`hasBrother(?x, ?y)`:**  This component verifies if there exists a 'hasBrother' relationship between individuals *x* and *y*, signifying that *x* has a brother *y*.
