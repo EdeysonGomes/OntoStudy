@@ -1,3 +1,29 @@
+# Genealogy Ontology
+
+![Ontology Image](Ontology.jpg)
+
+### Class Hierarchy for `Person`
+
+The sources provide information about the class hierarchy related to `Person`. 
+
+*   The ontology defines four main classes related to individuals: `Gender`, `Man`, `Person`, and `Woman`.
+*   **`Person` sits at the top of this hierarchy**. It is the most general class, encompassing any individual without specifying their gender.
+*   **`Man` and `Woman` are subclasses of `Person`**. This means that every instance of `Man` or `Woman` is also considered an instance of `Person`. 
+*   The `Gender` class represents the concept of gender and is linked to `Person` through the `hasGender` object property. 
+*   `Gender` is further defined as having two possible instances: `Female` and `Male`.
+*   `Man` is specifically defined as a `Person` whose gender is `Male`, and `Woman` is defined as a `Person` whose gender is `Female`.
+
+Therefore, the class hierarchy can be visualized as follows:
+
+```
+      Person
+       / \
+      /   \
+     Man   Woman
+```
+
+This hierarchy indicates that both `Man` and `Woman` inherit the characteristics and relationships associated with the `Person` class, while also having their specific attributes related to their gender. 
+
 ## TBox in the Provided Ontology
 
 The provided ontology file ("Genealogia_01.owl") defines several components that constitute its TBox (terminological box). The TBox focuses on defining the vocabulary and concepts within a knowledge domain. In this case, the domain is genealogy, and the TBox establishes the relationships and constraints related to familial ties.
