@@ -45,7 +45,7 @@ Here's a breakdown of the TBox components:
     *   `hasSibling`: Connects a `Person` to any of their siblings (`Person`).
     *   `hasSister`: Connects a `Person` to their female sibling (`Woman`). This property is a sub-property of `hasSibling`.
 
-*   **Property Chain Axioms:** These axioms define inferred relationships based on existing ones. They are expressed using the `owl:propertyChainAxiom` construct. The provided ontology includes two property chain axioms, which encode the inference rules discussed in our previous conversation:
+*   **Property Chain Axioms:** These axioms define inferred relationships based on existing ones. They are expressed using the `owl:propertyChainAxiom` construct. The provided ontology includes two property chain axioms, which encode the inference rules:
 
     *   Axiom for `hasFather`: It states that if an individual *x* has a brother *y*, and *y* has a father *f*, then *x* also has father *f*. This is expressed in DL as `hasBrother o hasFather -> hasFather`.
     *   Axiom for `hasMother`: It states that if individual *x* has a brother *y*, and *x* has a mother *m*, then *y* also has mother *m*. This is represented in DL using the inverse of the `hasBrother` property.
@@ -86,15 +86,57 @@ The DL mapping for **R3** follows a similar pattern:
 
 Several inferences can be made using the defined classes, object properties, and particularly, the property chain axioms in this ontology. These axioms allow the system to deduce new knowledge based on existing facts. Let's explore some potential inferences:
 
-**Inferences Based on Rule R1 (`hasBrother(?x, ?y) ^ hasMother(?x, ?m) -> hasMother(?y, ?m)`):**
+## Inferring Motherhood Using Rule R1
 
-*   From source, we know that Archie has a father named Harry: `:Archie rdf:type owl:NamedIndividual , :Person ; :hasFather :Harry .`.
-*   From source, we also know that Lilibet has a brother named Archie: `:Lilibet rdf:type owl:NamedIndividual , :Person ; :hasBrother :Archie ;`. 
-*   Combining this information with R1, we can infer that Lilibet also has Harry as her father, even though this fact is not explicitly stated in the ontology.
+Rule R1, expressed as `hasBrother(?x, ?y) ^ hasMother(?x, ?m) -> hasMother(?y, ?m)`, enables the inference of a mother-child relationship based on the sibling relationship and the mother of one sibling. Let's break down how this works:
 
-**Inferences Based on Rule R3 (`hasBrother(?x, ?y) ^ hasFather(?y, ?f) -> hasFather(?x, ?f)`):**
+*   **`hasBrother(?x, ?y)`**: This part of the rule checks if there is a 'hasBrother' relationship between two individuals, let's call them *x* and *y*. In simpler terms, it checks if *x* has a brother *y*.
 
-*   Using the facts from that Lilibet has a brother Archie, and Archie has a father Harry, we can use R3 to deduce that Lilibet also has Harry as her father. This reinforces the previous inference derived from R1.
+*   **`hasMother(?x, ?m)`**:  This part checks if individual *x* has a 'hasMother' relationship with another individual, *m*. This means it verifies if *m* is the mother of *x*.
+
+*   **`-> hasMother(?y, ?m)`**: This is the consequence of the rule. If both the preceding conditions are true (i.e., *x* has a brother *y*, and *x* has a mother *m*), then the rule infers that *y* also has the same mother *m*.
+
+Let's look at a concrete example from the sources to illustrate this:
+
+*   We know that Lilibet has a brother named Archie: `:Lilibet rdf:type owl:NamedIndividual , :Person ; :hasBrother :Archie ;`.
+*   We also know that Lilibet has a mother named Meghan: `:Lilibet rdf:type owl:NamedIndividual , :Person ; :hasBrother :Archie ; :hasMother :Meghan .`.
+
+Applying R1:
+
+*   *x* corresponds to Lilibet.
+*   *y* corresponds to Archie.
+*   *m* corresponds to Meghan.
+
+Since Lilibet has a brother Archie, and Lilibet has a mother Meghan, R1 allows us to infer that **Archie also has Meghan as his mother**. This inference is derived even though the fact that Archie's mother is Meghan is not explicitly stated in the sources.
+
+Therefore, R1 leverages the existing sibling and mother-child relationships to deduce the maternal connection for the other sibling, demonstrating the reasoning capabilities of the ontology.
+
+
+## Inferring Fatherhood via Rule R3
+
+Rule R3, represented as `hasBrother(?x, ?y) ^ hasFather(?y, ?f) -> hasFather(?x, ?f)`, focuses on inferring the father of an individual based on their sibling relationship and the father of their sibling. Here's a detailed explanation of how R3 works:
+
+*   **`hasBrother(?x, ?y)`:**  This component verifies if there exists a 'hasBrother' relationship between individuals *x* and *y*, signifying that *x* has a brother *y*.
+
+*   **`hasFather(?y, ?f)`:** This part checks for the existence of a 'hasFather' relationship between *y* (the brother) and another individual, *f*, confirming that *f* is the father of *y*.
+
+*   **`-> hasFather(?x, ?f)`:**  This represents the result derived from the rule. If both the conditions mentioned above hold true (i.e., *x* has a brother *y*, and *y* has a father *f*), the rule deduces that *x* also shares the same father *f*.
+
+Now, let's apply R3 to a specific scenario from the provided sources:
+
+*   We know that Lilibet has a brother named Archie: `:Lilibet rdf:type owl:NamedIndividual , :Person ; :hasBrother :Archie ;`.
+*   We also know that Archie has a father named Harry: `:Archie rdf:type owl:NamedIndividual , :Person ; :hasFather :Harry .`.
+
+Mapping this information to R3:
+
+*   *x* corresponds to Lilibet.
+*   *y* corresponds to Archie.
+*   *f* corresponds to Harry.
+
+Given that Lilibet has a brother Archie, and Archie has a father Harry, we can use R3 to conclude that **Lilibet also has Harry as her father**. This inference is made possible even though the fact that Lilibet's father is Harry isn't directly stated in the sources.
+
+In essence, R3 utilizes the existing brother-sister relationship and the father of one sibling to infer the paternal link for the other sibling. This exemplifies the reasoning capability facilitated by the ontology, enabling the discovery of new knowledge through logical inference. 
+
 
 **General Inferences Based on Class and Property Definitions:**
 
