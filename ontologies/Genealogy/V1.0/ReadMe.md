@@ -88,6 +88,8 @@ Several inferences can be made using the defined classes, object properties, and
 
 ## Inferring Motherhood Using Rule R1
 
+![hasMother](hasMotherDL.jpg)
+
 Rule R1, expressed as `hasBrother(?x, ?y) ^ hasMother(?x, ?m) -> hasMother(?y, ?m)`, enables the inference of a mother-child relationship based on the sibling relationship and the mother of one sibling. Let's break down how this works:
 
 *   **`hasBrother(?x, ?y)`**: This part of the rule checks if there is a 'hasBrother' relationship between two individuals, let's call them *x* and *y*. In simpler terms, it checks if *x* has a brother *y*.
@@ -149,3 +151,92 @@ In essence, R3 utilizes the existing brother-sister relationship and the father 
 *   The same logic applies to `hasSister` being a sub-property of `hasSibling`.
 
 These examples illustrate how the ontology enables reasoning and the derivation of new knowledge based on the defined axioms and relationships. By combining the explicit facts stated in the ontology with the inference rules, a system can infer additional information about the individuals and their family connections. 
+
+
+## Archie Assertions
+![ArchieAssertions](ArchieAssertions.jpg)
+
+### Explicit Assertions
+- **hasFather**: Harry
+
+### Inferred Relationships
+
+#### **Man**
+- **`hasBrother` Relationship**:
+  - Lilibet hasBrother Archie
+  - hasBrother ranges over Man
+
+#### **hasGender: Male**
+- **`hasBrother` Relationship**:
+  - Lilibet hasBrother Archie
+  - hasBrother ranges over Man
+- **Man Definition**:
+  - Man is equivalent to Person and hasGender value Man.
+
+#### **hasMother: Meghan**
+- **Inferred Relationships**:
+  - Lilibet hasBrother Archie
+  - Lilibet hasMother Meghan
+- **SubProperty Inference**:
+  - `inverse(hasBrother) o hasMother` is a SubProperty of hasMother.
+
+#### **hasParent: Meghan**
+- **Inferred Relationships**:
+  - Lilibet hasBrother Archie
+  - Lilibet hasMother Meghan
+- **SubProperty Inference**:
+  - `inverse(hasBrother) o hasMother` is a SubProperty of hasMother.
+  - hasMother is a SubProperty of hasParent.
+
+#### **hasParent: Harry**
+- **Inferred Relationships**:
+  - Archie hasFather Harry
+  - hasFather is a SubProperty of hasParent.
+
+---
+
+### Explanation of the Expression
+
+#### **`inverse(hasBrother) o hasMother SubPropertyOf hasMother`**
+
+##### Key Components:
+1. **`inverse(hasBrother)`**:
+   - Refers to the inverse of the `hasBrother` property.
+   - If `hasBrother(X, Y)` means "X has Y as a brother," then `inverse(hasBrother)(Y, X)` means "Y is the brother of X."
+
+2. **`o` (Composition Operator)**:
+   - The composition operator indicates that two properties are combined sequentially.
+   - For two properties `P` and `Q`, `P o Q` means: "If there is a relationship `P(A, B)` and a relationship `Q(B, C)`, then there is a composite relationship between `A` and `C`."
+
+3. **`SubPropertyOf`**:
+   - Indicates that the composite relationship is a subproperty of another property, in this case, `hasMother`.
+   - If `P o Q SubPropertyOf R`, then every relationship derived from `P o Q` is also valid under `R`.
+
+##### What the Rule Means:
+
+1. **Composition Logic**:
+   - `inverse(hasBrother) o hasMother` means:
+     1. Start with a person `Y` who has a brother `X` (`inverse(hasBrother)` relationship).
+     2. Then, check who is the mother of `X` (`hasMother` relationship).
+     3. As a result, infer that the mother of `X` is also the mother of `Y`.
+
+2. **Inference Rule**:
+   - If **Person Y** is the brother of **Person X**, and **Person X** has a mother **M**, then **Person Y** also has **M** as their mother.
+
+##### Example:
+
+- **Given**:
+  - `hasBrother(John, Mark)`: "John has Mark as a brother."
+  - `hasMother(Mark, Mary)`: "Mark has Mary as a mother."
+
+- **Inferred**:
+  - By the rule, `inverse(hasBrother)(Mark, John) o hasMother(Mark, Mary)` allows us to infer:
+    - `hasMother(John, Mary)`: "John also has Mary as his mother."
+
+##### Practical Use:
+
+This rule helps to propagate family relationships logically:
+
+1. It ensures that maternal relationships are consistent across siblings.
+2. It formalizes the assumption that brothers share the same mother, enabling automated reasoning in a genealogy ontology.
+
