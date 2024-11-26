@@ -1,6 +1,6 @@
 # Genealogy Ontology
 
-![Ontology Image](images\Ontology.jpg)
+![Ontology Image](images/Ontology.jpg)
 
 ### Class Hierarchy for `Person`
 
@@ -88,7 +88,7 @@ Several inferences can be made using the defined classes, object properties, and
 
 ## Inferring Motherhood Using Rule R1
 
-![hasMother](images\hasMotherDL.jpg)
+![hasMother](images/hasMotherDL.jpg)
 
 Rule R1, expressed as `hasBrother(?x, ?y) ^ hasMother(?x, ?m) -> hasMother(?y, ?m)`, enables the inference of a mother-child relationship based on the sibling relationship and the mother of one sibling. Let's break down how this works:
 
@@ -116,7 +116,7 @@ Therefore, R1 leverages the existing sibling and mother-child relationships to d
 
 ## Inferring Fatherhood via Rule R3
 
-![hasFather](images\hasFatherDL.jpg)
+![hasFather](images/hasFatherDL.jpg)
 
 
 Rule R3, represented as `hasBrother(?x, ?y) ^ hasFather(?y, ?f) -> hasFather(?x, ?f)`, focuses on inferring the father of an individual based on their sibling relationship and the father of their sibling. Here's a detailed explanation of how R3 works:
@@ -154,7 +154,7 @@ These examples illustrate how the ontology enables reasoning and the derivation 
 
 
 ## Archie Assertions
-![ArchieAssertions](images\ArchieAssertions.jpg)
+![ArchieAssertions](images/ArchieAssertions.jpg)
 
 ### Explicit Assertions
 - Archie **hasFather**: Harry
