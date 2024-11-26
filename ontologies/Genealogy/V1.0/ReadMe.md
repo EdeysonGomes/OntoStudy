@@ -240,3 +240,64 @@ This rule helps to propagate family relationships logically:
 1. It ensures that maternal relationships are consistent across siblings.
 2. It formalizes the assumption that brothers share the same mother, enabling automated reasoning in a genealogy ontology.
 
+
+Here's the improved and markdown-formatted explanation for **Lilibet**:
+
+---
+
+## Lilibet Assertions
+![LilibetAssertions](images/LilibetAssertions.jpg)
+
+### Direct Assertions:
+- **`hasBrother`**: Archie  
+- **`hasMother`**: Meghan  
+
+
+## Inferred Relationships:
+
+### **1. `hasFather`**: Harry
+- **Reasoning**:
+  - Archie hasFather Harry.
+  - Lilibet hasBrother Archie, and by the rule:
+    - **`hasBrother o hasFather SubPropertyOf hasFather`**
+      - If a person has a brother, and that brother has a father, the person also shares the same father.
+
+### **2. `hasParent`**: Meghan
+- **Reasoning**:
+  - Lilibet hasMother Meghan.
+  - By the rule:
+    - **`hasMother SubPropertyOf hasParent`**
+      - A mother is a type of parent.
+
+### **3. `hasParent`**: Harry
+- **Reasoning**:
+  - Lilibet hasFather Harry.
+  - By the rule:
+    - **`hasFather SubPropertyOf hasParent`**
+      - A father is a type of parent.
+
+### **4. `hasSibling`**: Archie
+- **Reasoning**:
+  - Lilibet hasBrother Archie.
+  - By the rule:
+    - **`hasBrother SubPropertyOf hasSibling`**
+      - A brother is a sibling.
+
+
+
+## Explanation of Rules:
+
+### **`hasBrother o hasFather SubPropertyOf hasFather`**
+- **Key Components**:
+  1. **`hasBrother`**: Represents a sibling relationship.
+  2. **`hasFather`**: Represents a paternal relationship.
+  3. **`o` (composition operator)**:
+     - If `hasBrother(A, B)` and `hasFather(B, C)` are true, then `hasFather(A, C)` can be inferred.
+
+- **Example**:
+  - Given:
+    - `hasBrother(Lilibet, Archie)`
+    - `hasFather(Archie, Harry)`
+  - Inferred:
+    - `hasFather(Lilibet, Harry)`
+
