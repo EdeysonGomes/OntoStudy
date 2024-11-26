@@ -241,9 +241,7 @@ This rule helps to propagate family relationships logically:
 2. It formalizes the assumption that brothers share the same mother, enabling automated reasoning in a genealogy ontology.
 
 
-Here's the improved and markdown-formatted explanation for **Lilibet**:
 
----
 
 ## Lilibet Assertions
 ![LilibetAssertions](images/LilibetAssertions.jpg)
