@@ -1,3 +1,49 @@
+### Introduction
+
+The **Genealogy Ontology** project is part of the **OntoStudy** repository, designed to support the study of ontology concepts using **Protégé 5**. The aim is to incrementally develop and explore an ontology focused on genealogy, with examples drawn from the **British Royal Family**.
+
+#### Versioning and Structure
+
+The ontology is developed incrementally, with each version introducing new elements and relationships. Each version of the ontology is stored as a separate file in the directory:  
+**`ontologies/Genealogy/V1.0`**  
+
+The naming convention for ontology files is:  
+**`Genealogia_x.ttl`** (where `x = 01, 02, ...`).
+
+#### Current Version (V1.0)
+
+The first version of the ontology (**`Genealogia_01.ttl`**) includes the following individuals and relationships:
+
+- **Harry**: Represented as the father.
+- **Meghan**: Represented as the mother.
+- **Archie**: Represented as the son of Harry and Meghan.
+- **Lilibet**: Represented as the daughter of Harry and Meghan.
+
+      Harry (Man) ────┐
+                      │
+      Meghan (Woman) ─┴─── hasParent ─── Archie (Man)
+                      │
+                      └─── hasParent ─── Lilibet (Woman)
+
+
+
+This version defines the core familial relationships and basic class hierarchies, forming the foundation for further expansion in subsequent versions. 
+
+#### Objectives
+
+The primary goal of this ontology is to:
+
+1. Provide a hands-on example of creating and reasoning with ontologies.
+2. Illustrate how relationships (e.g., parent-child, sibling) and attributes (e.g., gender) can be formalized within an ontology.
+3. Serve as a practical tool for studying ontology modeling and reasoning, particularly in the context of family genealogies.
+
+#### Usage
+
+- Open the ontology file in **Protégé 5** to explore its structure, classes, properties, and relationships.
+- Experiment with reasoning tasks to infer relationships and verify the ontology's logical consistency.
+- Use the provided inference rules to deduce relationships not explicitly stated in the ontology. 
+
+This project will continue to evolve, introducing new individuals, relationships, and constraints in future versions to enhance learning and experimentation.
 # Genealogy Ontology
 
 ![Ontology Image](images/Ontology.jpg)
