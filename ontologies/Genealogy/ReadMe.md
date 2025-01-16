@@ -43,7 +43,7 @@ The primary objectives of this project are:
 
 ## **Repository Contents**
 
-- **`Genealogia_x.owl`**: The ontology file to be explored using Protégé (x is de version of the ontology).
+- **`Genealogia_x.ttl`**: The ontology file to be explored using Protégé (x is de version of the ontology).
 - **`images/`**: Diagrams and visualizations of the ontology structure.
 - **`examples/`**: Example queries and reasoning results.
 - **`README.md`**: This file, providing project details and usage instructions.
