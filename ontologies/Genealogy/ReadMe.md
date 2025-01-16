@@ -58,7 +58,7 @@ The primary objectives of this project are:
 
 ### 2. Load the Ontology
    - Open Protégé 5.
-   - Import the `Genealogia_x.owl` file from this repository (x is the version number of the ontology).
+   - Import the `Genealogia_x.ttl` file from this repository (x is the version number of the ontology).
 
 ### 3. Explore and Reason
    - Examine the class hierarchy and properties.
